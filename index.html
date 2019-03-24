@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>heapSORT</title>
+  </head>
+  <body style="font-family:arial; text-align:center; background-color:#FDF5D7; font-size:160%; margin-bottom:70px">
+    <img src="images/resize.jpg" alt="banner here" width="100%">
+
+    <form class="" method="post" enctype="multipart/form-data" id="readin" style="text-align:center; margin-top:50px">
+      <input type="file" name="inputfile" style="font-family:arial; font-size:100%" width="50">
+      <br />
+      <input type="image" src="images/sortbutton.png" height="50" style="margin-top:50px; margin-bottom:20px">
+    </form>
+
+
+    <p  id="message"></p>
+    <script type="text/javascript" style="text-align:center; margin-top:600px">
+      var button = document.getElementById("sort");
+      var form = document.getElementById("readin");
+
+      form.onsubmit = function(event) {
+        event.preventDefault();
+        if (!form.inputfile.files[0]) {
+          message.innerHTML = "Upload a damn image file";
+          return;
+        }
+        message.innerHTML = "The council is deliberating...";
+        var xmlrequest = new XMLHttpRequest();
+        xmlrequest.onreadystatechange = function() {
+          if (xmlrequest.readyState == XMLHttpRequest.DONE) {
+            message.innerHTML = xmlrequest.responseText;
+          }
+        }
+        xmlrequest.open('POST', '', true);
+        var data = new FormData(form);
+        xmlrequest.send(data);
+      }
+    </script>
+  </body>
+
+
+</html>
